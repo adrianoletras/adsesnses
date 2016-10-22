@@ -1,0 +1,48 @@
+/**
+ *	Script para criar um popunder em todos os links da home de Sites Por daniel paner ?
+**/
+var qburl = "http://go.ad2up.com/afu.php?id=664046";
+var jaClicou = false;
+var vlrCookie = readCookie("qbpopunder");
+if(vlrCookie == null){
+	for(i=0;i<document.links.length;i++) {
+		var bf_a=document.links[i];
+		bool = bf_a.onclick ? true : false;
+		
+			bf_a.onclick = function() {
+			  if(!jaClicou){
+				createCookie("qbpopunder","1",".agaleradodownload.info/perfect/codes.php",30);
+				qb_newwin= window.open(qburl,'qbpopunder','toolbar=yes,location=yes,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,copyhistory=yes');
+				jaClicou = true;
+				qb_newwin.blur();
+				window.focus();
+				}
+				return true;
+			};
+	}
+}
+function createCookie(name, value, domainName, days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime() + (days*24*60*60*1000));
+		var expires = "; expires=" + date.toGMTString();
+		var domain = "; domain=" + domainName;
+	}
+	else var expires = "";
+	document.cookie = name + "=" + value + expires + domain + "; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name, "", -1);
+}
